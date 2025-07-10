@@ -1,7 +1,7 @@
 use crate::{core, daemon::{self, protocol::Request}};
 use clap::{Parser, Subcommand};
 
-/// # App struct for clap
+/// # Software to control Lian Li hub lights on Linux
 #[derive(Debug, Parser)]
 #[clap(name = "lianlinux", version)]
 pub struct App {
