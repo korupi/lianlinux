@@ -1,7 +1,7 @@
 use std::io::{Read, Write};
 use std::os::unix::net::UnixStream;
 
-use crate::daemon::protocol::{Request, Response};
+use crate::daemon::protocol::Request;
 
 use anyhow::Context;
 

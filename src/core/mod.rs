@@ -1,4 +1,4 @@
-use std::{any, sync::Mutex};
+use std::sync::Mutex;
 
 use anyhow::bail;
 use colored::Colorize;

@@ -1,4 +1,4 @@
-use crate::{core::{self, devices::Controller}, daemon::{self, protocol::Request}};
+use crate::{core, daemon::{self, protocol::Request}};
 use clap::{Parser, Subcommand};
 
 /// # App struct for clap

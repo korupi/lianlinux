@@ -1,11 +1,9 @@
-use std::any;
 use std::io::{Read, Write};
 use std::os::unix::net::{UnixListener, UnixStream};
 use std::sync::{Arc, Mutex};
 
 use anyhow::Context;
 use protocol::Request;
-use serde::Serialize;
 
 use crate::core::devices::Controller;
 use crate::core::modes::{breathing_mode, morph_mode, rainbow_mode, runway_mode, static_mode};
