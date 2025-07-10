@@ -12,7 +12,7 @@
 [package]
 edition = "2021"
 name = "lian-linux"
-version = "0.1.1"
+version = "0.1.2"
 description = "An app to control Lian Li lights in Linux"
 readme = "README.md"
 license = "MIT"

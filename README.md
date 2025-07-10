@@ -8,11 +8,38 @@
 
 > An app to control Lian Li Hub lights on Linux
 
+> [!WARNING]
+> This project is a Work in Process, so expect bugs, etc. I'm working on fixing any bugs and extending functionality of lianlinux.
+
 > [!IMPORTANT]  
 > I only have **LianLi-UNI FAN-SL-v1.8** hub, so I can't support other devices. Contributions are welcome!
 
 # About
 LianLinux is an app written in Rust to control Lian Li hub RGB light on Linux.
+
+# Installation
+Please note that at the moment there's no config system, so unless it's implemented you have to set the colors manually.
+```sh
+cargo install lian-linux
+```
+
+# Usage
+Run the daemon:
+```sh
+lian-linux daemon
+```
+
+Manipulate your controller's lights:
+```sh
+lian-linux light <MODE> [HEX COLOR]
+```
+
+## Possible modes
+* `static` - requires one HEX color
+* `breathing` - requires one HEX color
+* `rainbow`
+* `morph`
+* `runway` - requires two HEX colors, doesn't work at the moment
 
 ---
 <p align="center>MIT License</p>
