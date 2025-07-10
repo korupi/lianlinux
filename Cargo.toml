@@ -16,6 +16,7 @@ version = "0.1.0"
 description = "An app to control Lian Li lights in Linux"
 readme = "README.md"
 license = "MIT"
+repository = "https://github.com/korupi/lianlinux.git"
 
 [dependencies]
 anyhow = "1.0.98"
