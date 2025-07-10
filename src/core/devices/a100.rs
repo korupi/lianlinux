@@ -1,4 +1,4 @@
-use std::{process::exit, vec};
+use std::vec;
 use hidapi::{HidApi, HidDevice};
 
 use crate::core::{devices::Controller, modes, DEVICE_LIST, LIANLI_VENDOR_ID};
@@ -49,7 +49,7 @@ pub fn set_rgb_mode(color: &[u8], mode: u8, device: &HidDevice) {
 ///
 /// Test if a controller handles write operations ok
 ///
-pub fn init(api: HidApi) -> Result<Controller, Box<dyn std::error::Error>> {
+pub fn init(api: HidApi) -> anyhow::Result<Controller> {
     //let mut devices_list = DEVICE_LIST.lock().unwrap();
     let device = api.open(LIANLI_VENDOR_ID, PRODUCT_ID)?;
 
@@ -61,6 +61,6 @@ pub fn init(api: HidApi) -> Result<Controller, Box<dyn std::error::Error>> {
         Ok(None) => println!("Found a controller with no product string."),
         Err(e) => println!("Found a controller, but failed to get product string: {}", e),
     }
-    modes::runway_mode(&controller, &[255, 255, 255, 255, 0, 0]);
+
     Ok(controller)
 }

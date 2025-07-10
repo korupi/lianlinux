@@ -1,9 +1,9 @@
-use crate::packet::*;
 use hidapi::HidDevice;
 
 pub mod a100;
 
 /// # Controller structure
+#[derive(Debug)]
 pub struct Controller {
     device: HidDevice,
     report_byte: u8
@@ -18,14 +18,14 @@ impl Controller {
     }
 
     pub fn write_mode_packet(&self, index: u8, data: &[u8]) {
-        let mut packet = vec![0xE0, 0x10 + index];
+        let mut packet = vec![self.report_byte, 0x10 + index];
         packet.extend_from_slice(data);
         let _ = self.device.write(&packet);
     }
 
     pub fn write_rgb_packet(&self, index: u8, mode: u8, color: &[u8]) {
-        let mode_packet = vec![0xE0, 0x10 + index, mode];
-        let mut rgb_packet = vec![0xE0, 0x30 + index];
+        let mode_packet = vec![self.report_byte, 0x10 + index, mode];
+        let mut rgb_packet = vec![self.report_byte, 0x30 + index];
         rgb_packet.extend_from_slice(&color.repeat(0x400));
         let _ = self.device.write(&mode_packet);
         let _ = self.device.write(&rgb_packet);
