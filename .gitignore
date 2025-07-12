@@ -28,7 +28,7 @@ Session.vim
 .dir-locals.el
 
 ## Tool
-.valgrindrc
+valgrindrc
 .cargo
 # Included because it is part of the test case
 !/tests/run-make/thumb-none-qemu/example/.cargo

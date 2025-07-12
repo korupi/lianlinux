@@ -5,13 +5,13 @@ extern crate hidapi;
 mod core;
 mod daemon;
 mod cmd;
+mod config;
+mod utils;
 
 /// # Main `lianlinux` function
 ///
-/// Initializes `core` module if ran as root and handles 
-/// command line arguments asynchrously
+/// Handles command line arguments
 #[tokio::main]
 async fn main() {
-    //let controller = core::init().expect("u");
     handle_args().await;
 }

@@ -1,4 +1,7 @@
-use crate::{core, daemon::{self, protocol::Request}};
+use crate::{
+    core,
+    daemon::{self, protocol::Request},
+};
 use clap::{Parser, Subcommand};
 
 /// # Software to control Lian Li hub lights on Linux
@@ -21,8 +24,8 @@ enum Command {
         mode: String,
 
         /// Hex color (e.g. FF0000)
-        color: Option<String>
-    }
+        color: Option<String>,
+    },
 }
 
 /// # Handle command line arguments
@@ -30,11 +33,11 @@ pub async fn handle_args() {
     let args = App::parse();
 
     match args.command {
-        Command::Daemon {  } => {
+        Command::Daemon {} => {
             let controller = core::init().expect("Controller initialization failed");
             let d = daemon::init(controller);
             match d {
-                Ok(_) => {},
+                Ok(_) => {}
                 Err(e) => {
                     eprintln!("{e}");
                 }
@@ -42,17 +45,15 @@ pub async fn handle_args() {
         }
         Command::Light { mode, color } => {
             // Prepare args
-            let args = color
-                .map(|c| vec![c]) // wrap in Vec<String>
-                .or(Some(vec![])); // fallback to empty vec if None
+            let args = color.map(|c| {
+                c.split(',')
+                    .map(|s| s.trim().to_string())
+                    .collect::<Vec<String>>()
+            });
+
             // Send request
-            if let Err(e) = daemon::client::send_message(
-                Request {
-                    mode,
-                    args,
-            }
-            ) {
-                eprintln!("Error sending request: {}", e)
+            if let Err(e) = daemon::client::send_message(Request { mode, args }) {
+                eprintln!("Error sending request: {}", e);
             }
         }
     }

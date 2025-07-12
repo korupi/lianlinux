@@ -17,7 +17,7 @@ pub fn send_message(request: Request) -> anyhow::Result<()> {
         .shutdown(std::net::Shutdown::Write)
         .context("Could not shutdown writing on the stream")?;
 
-    let _ =read_from_stream(&mut unix_stream);
+    let _ = read_from_stream(&mut unix_stream);
 
     Ok(())
 }

@@ -23,6 +23,11 @@ Please note that at the moment there's no config system, so unless it's implemen
 cargo install lian-linux
 ```
 
+Then, create a file in /etc/udev/rules.d/ called 51-lianlinux.rules with the following content to allow the daemon to access the device:
+```
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="0cf2", ATTRS{idProduct}=="a100", MODE="0666", GROUP="plugdev"
+```
+
 # Usage
 Run the daemon:
 ```sh
@@ -34,12 +39,28 @@ Manipulate your controller's lights:
 lian-linux light <MODE> [HEX COLOR]
 ```
 
+## Example:
+Static mode with red color (FF0000):
+```sh
+lian-linux light static FF0000
+```
+
+Runway mode with red and blue colors (FF0000, 0000FF):
+```sh
+lian-linux light runway FF0000,0000FF
+```
+
 ## Possible modes
 * `static` - requires one HEX color
 * `breathing` - requires one HEX color
 * `rainbow`
 * `morph`
-* `runway` - requires two HEX colors, doesn't work at the moment
+* `runway` - requires two HEX colors
+
+# Roadmap
+- [x] Basic working version
+- [ ] Configs
+- [ ] Support all modes
 
 ---
 <p align="center>MIT License</p>
