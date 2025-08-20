@@ -1,7 +1,6 @@
 use std::sync::Mutex;
 
 use anyhow::bail;
-use colored::Colorize;
 use devices::Controller;
 use hidapi::{HidApi, HidDevice};
 use lazy_static::lazy_static;
@@ -38,20 +37,15 @@ pub fn init() -> anyhow::Result<Controller> {
 
         return handle_lianli_device(device_info)
     }
-    bail!("uh wha");
+    bail!("No devices found.");
 }
 
 fn handle_lianli_device(device_info: &hidapi::DeviceInfo) -> anyhow::Result<Controller> {
     match device_info.product_id() {
         0xA100 => {
-            Ok(a100::init(HidApi::new().unwrap()).expect("uh.."))
+            Ok(a100::init(HidApi::new().unwrap()).expect("Failed to initialize `a100` controller"))
         }
         _ => {
-            eprintln!(
-                "{} controller found (PID: {:04X})",
-                "Unsupported".red(),
-                device_info.product_id()
-            );
             bail!("Unsupported controller found")
         }
     }
