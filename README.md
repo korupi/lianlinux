@@ -51,7 +51,7 @@ lian-linux light runway FF0000,0000FF
 ```
 
 ## Configuration
-See the example in `config.toml` in this repository. It's pretty self-explanatory. `lian-linux` looks for config files either in $HOME/.config/lianlinux.toml or /etc/lianlinux.toml if ran as root.
+See the example in `lianlinux.toml` in this repository. It's pretty self-explanatory. `lian-linux` looks for config files either in $HOME/.config/lianlinux.toml or /etc/lianlinux.toml if ran as root.
 
 ## Possible modes
 * `static` - requires one HEX color
